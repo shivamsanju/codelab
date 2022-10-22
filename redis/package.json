@@ -1,0 +1,25 @@
+{
+  "name": "codeplay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "async.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivamsanju/experiments.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivamsanju/experiments/issues"
+  },
+  "homepage": "https://github.com/shivamsanju/experiments#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.1",
+    "ioredis": "^5.0.5"
+  }
+}

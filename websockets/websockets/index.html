@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>HTML5 Chat</title>
+
+    <body>
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <header>
+          <h1>Websocket Chat</h1>
+          <h2><span>Status: </span><span id = 'status'>Not Connected</span><h2>
+        </header>
+        <div>
+          <input
+            type="text"
+            id="chat"
+            placeholder="type"
+            style="padding: 5px"
+          />
+          <input
+            type="submit"
+            value="Send"
+            onclick="addMessage()"
+            style="padding: 5px"
+          />
+          <h3 style="margin-top: 20px">Logs</h3>
+          <ul id="log"></ul>
+        </div>
+      </div>
+      <script>
+        //create a web socket connection
+        const socket = new WebSocket('ws://localhost:3000');
+
+        // connection opened
+        socket.addEventListener('open', function (e) {
+          console.log('connected to ws');
+          document.getElementById('status').innerHTML = 'Connected';
+        });
+
+        // send message
+        function addMessage() {
+          const message = document.getElementById('chat');
+          socket.send(message.value);
+          message.value = '';
+        }
+
+        // Listen for messages
+        socket.addEventListener('message', function (e) {
+          console.log('received message from server: ' + e.data);
+          const chat = document.getElementById('log');
+          chat.innerHTML = '<li>' + e.data + '</li>' + chat.innerHTML;
+        });
+
+        //// connection opened
+        socket.addEventListener('close', function (e) {
+          console.log('disconnected to ws');
+          document.getElementById('status').innerHTML = 'Not Connected';
+        });
+      </script>
+    </body>
+  </head>
+</html>
